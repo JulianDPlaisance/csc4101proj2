@@ -44,6 +44,12 @@ namespace Tree
         // TODO: The method apply() should be defined in class Node
         // to report an error.  It should be overridden only in classes
         // BuiltIn and Closure.  Probably will have to include calls to eval
+        // The Function apply in BuiltIn responds only to functions that are 
+        // native to Scheme, such as define, let, set!, etc.
+        // closure is for user-defined functions
+        // Extract environment out of the closure;
+        // add a new frame to the environment that binds the parameters to the corresponding argument values;
+        // Recursively call eval for the function body and the new argument
         public override Node apply(Node args)
         {
             Node arg1 = args.getCar();
