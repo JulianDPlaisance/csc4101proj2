@@ -50,43 +50,51 @@ namespace Tree
                 return null;
 
             String Symbol = symbol.getName();
-            Node argsCar = args.getCar(), argsCdr = args.getCdr().getCar();
+            Node arg1 = args.getCar(), arg2 = args.getCdr().getCar();
             switch (Symbol)
             {
                 case "symbol?":
-                    break;
+                    return BoolLit.getInstance(arg1.isSymbol());
                 case "number?":
-                    break;
+                    return BoolLit.getInstance(arg1.isNumber());
                 case "b+":
-                    return BinArith(((IntLit)argsCar).getValue(), ((IntLit)argsCdr).getValue(), "+");
+                    return BinArith(((IntLit)arg1).getValue(), ((IntLit)arg2).getValue(), "+");
                 case "b-":
-                    return BinArith(((IntLit)argsCar).getValue(), ((IntLit)argsCdr).getValue(), "-");
+                    return BinArith(((IntLit)arg1).getValue(), ((IntLit)arg2).getValue(), "-");
                 case "b*":
-                    return BinArith(((IntLit)argsCar).getValue(), ((IntLit)argsCdr).getValue(), "*");
+                    return BinArith(((IntLit)arg1).getValue(), ((IntLit)arg2).getValue(), "*");
                 case "b/":
-                    return BinArith(((IntLit)argsCar).getValue(), ((IntLit)argsCdr).getValue(), "/");
+                    return BinArith(((IntLit)arg1).getValue(), ((IntLit)arg2).getValue(), "/");
                 case "b=":
-                    return BinArith(((IntLit)argsCar).getValue(), ((IntLit)argsCdr).getValue(), "=");
+                    return BinArith(((IntLit)arg1).getValue(), ((IntLit)arg2).getValue(), "=");
                 case "b>":
-                    return BinArith(((IntLit)argsCar).getValue(), ((IntLit)argsCdr).getValue(), ">");
+                    return BinArith(((IntLit)arg1).getValue(), ((IntLit)arg2).getValue(), ">");
                 case "b<":
-                    return BinArith(((IntLit)argsCar).getValue(), ((IntLit)argsCdr).getValue(), "<");
-                case "car":
-                    break;
-                case "cdr":
-                    break;
+                    return BinArith(((IntLit)arg1).getValue(), ((IntLit)arg2).getValue(), "<");
+                case "car":  // ????????????????
+                    if (arg1.isNull())
+                        return arg1; //arg1==nil or null?
+                    else
+                        return arg1.getCar();
+                case "cdr":  // ????????????????
+                    if (arg1.isNull())
+                        return arg1; //arg1==nil or null?
+                    else
+                        return arg1.getCdr();
                 case "cons":
-                    break;
+                    return new Cons(arg1, arg2);
                 case "set-car!":
-                    break;
+                    arg1.setCar(arg2);
+                    return arg1;
                 case "set-cdr!":
-                    break;
+                    arg1.setCdr(arg2);
+                    return arg1;
                 case "null?":
-                    break;
+                    return BoolLit.getInstance(arg1.isNull());
                 case "pair?":
-                    break;
+                    return BoolLit.getInstance(arg1.isPair());
                 case "eq?":
-                    break;
+                    return BoolLit.getInstance(arg1 == arg2);
                 case "procedure?":
                     break;
                 case "read": //not sure
@@ -97,7 +105,7 @@ namespace Tree
                     break;
                 case "newline": //\n?
                     break;
-                case "eval": // danananananananananana
+                case "eval": // danananananananananana  BATMAN
                     break;
                 case "apply": // apply DIS
                     break;

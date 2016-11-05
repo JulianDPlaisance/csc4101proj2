@@ -107,17 +107,7 @@ namespace Tree
         //      otherwise add a name-value pair as first element to the innermost scope
         public void define(Node id, Node val)
         {
-            /*
-             * We need to compare frame & id, to see if id exists in frame 
-             * if(frame == id)
-             * {
-             *      lookup(frame) == val;
-             * }
-             * else
-             * {
-             *      frame.getCar() == new Cons(id, val);
-             * }
-            */
+            frame = new Cons(id, new Cons(val, null));
         }
 
         //  - assign to a name (for implementing set!)
