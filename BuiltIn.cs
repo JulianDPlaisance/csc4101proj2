@@ -44,25 +44,92 @@ namespace Tree
         // TODO: The method apply() should be defined in class Node
         // to report an error.  It should be overridden only in classes
         // BuiltIn and Closure.  Probably will have to include calls to eval
-        // The Function apply in BuiltIn responds only to functions that are 
-        // native to Scheme, such as define, let, set!, etc.
-        // closure is for user-defined functions
-        // Extract environment out of the closure;
-        // add a new frame to the environment that binds the parameters to the corresponding argument values;
-        // Recursively call eval for the function body and the new argument
         public override Node apply(Node args)
         {
-            Node arg1 = args.getCar();
-            Node arg2 = args.getCdr();
-            //if()
-            //{
+            if (args == null)
+                return null;
 
-            //}
-            //else
-            //{
+            String Symbol = symbol.getName();
+            Node argsCar = args.getCar(), argsCdr = args.getCdr().getCar();
+            switch (Symbol)
+            {
+                case "symbol?":
+                    break;
+                case "number?":
+                    break;
+                case "b+":
+                    return BinArith(((IntLit)argsCar).getValue(), ((IntLit)argsCdr).getValue(), "+");
+                case "b-":
+                    return BinArith(((IntLit)argsCar).getValue(), ((IntLit)argsCdr).getValue(), "-");
+                case "b*":
+                    return BinArith(((IntLit)argsCar).getValue(), ((IntLit)argsCdr).getValue(), "*");
+                case "b/":
+                    return BinArith(((IntLit)argsCar).getValue(), ((IntLit)argsCdr).getValue(), "/");
+                case "b=":
+                    return BinArith(((IntLit)argsCar).getValue(), ((IntLit)argsCdr).getValue(), "=");
+                case "b>":
+                    return BinArith(((IntLit)argsCar).getValue(), ((IntLit)argsCdr).getValue(), ">");
+                case "b<":
+                    return BinArith(((IntLit)argsCar).getValue(), ((IntLit)argsCdr).getValue(), "<");
+                case "car":
+                    break;
+                case "cdr":
+                    break;
+                case "cons":
+                    break;
+                case "set-car!":
+                    break;
+                case "set-cdr!":
+                    break;
+                case "null?":
+                    break;
+                case "pair?":
+                    break;
+                case "eq?":
+                    break;
+                case "procedure?":
+                    break;
+                case "read": //not sure
+                    break;
+                case "write": //bamboozeled
+                    break;
+                case "display": //MySQL query
+                    break;
+                case "newline": //\n?
+                    break;
+                case "eval": // danananananananananana
+                    break;
+                case "apply": // apply DIS
+                    break;
+                case "interaction-environment": // interacttteddlkskllklkfd
+                    break;
 
-            //}
+            }
+
             return null;
+        }
+
+        private Node BinArith(int arg1, int arg2, string s)
+        {
+            switch (s)
+            {
+                case "+":
+                    return new IntLit(arg1 + arg2);
+                case "-":
+                    return new IntLit(arg1 - arg2);
+                case "*":
+                    return new IntLit(arg1 * arg2);
+                case "/":
+                    return new IntLit(arg1 / arg2);
+                case "=":
+                    return BoolLit.getInstance(arg1 == arg2);
+                case "<":
+                    return BoolLit.getInstance(arg1 < arg2);
+                case ">":
+                    return BoolLit.getInstance(arg1 > arg2);
+                default:
+                    return null;
+            }
         }
     }    
 }

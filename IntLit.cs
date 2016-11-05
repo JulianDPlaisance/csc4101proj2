@@ -27,5 +27,10 @@ namespace Tree
         {
             return this;
         }
+
+        public int getValue()
+        {
+            return intVal;
+        }
     }
 }

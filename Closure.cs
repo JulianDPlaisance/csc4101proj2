@@ -26,7 +26,7 @@ namespace Tree
 
         // TODO: The method isProcedure() should be defined in
         // class Node to return false.
-        public /* override */ bool isProcedure()	{ return true; }
+        public override bool isProcedure()	{ return true; }
 
         public override void print(int n) {
             // there got to be a more efficient way to print n spaces
@@ -43,11 +43,6 @@ namespace Tree
         // TODO: The method apply() should be defined in class Node
         // to report an error.  It should be overridden only in classes
         // BuiltIn and Closure.
-        // Closure apply is for user Defined functions, BuiltIn is for
-        // scheme defined functions such as define, let, lambda, etc
-        // Extract environment out of the closure;
-        // add a new frame to the environment that binds the parameters to the corresponding argument values;
-        // Recursively call eval for the function body and the new argument
         public override Node apply (Node args)
         {
             return new StringLit("Error: Closure.apply not yet implemented");

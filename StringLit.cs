@@ -27,6 +27,10 @@ namespace Tree
         {
             return this;
         }
+        public override string getName()
+        {
+            return stringVal.ToString();
+        }
     }
 }
 
