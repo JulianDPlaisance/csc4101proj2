@@ -81,7 +81,7 @@ namespace Tree
 
         public virtual Node eval(Environment env)
         {
-            return this;
+            throw new Exception("ERROR: calling Node.eval in a non node.eval overridden class");
         }
 
         public virtual Node apply(Node args)

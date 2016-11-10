@@ -76,11 +76,13 @@ namespace Tree
                         return arg1; //arg1==nil or null?
                     else
                         return arg1.getCar();
+
                 case "cdr":  // ????????????????
                     if (arg1.isNull())
                         return arg1; //arg1==nil or null?
                     else
                         return arg1.getCdr();
+
                 case "cons":
                     return new Cons(arg1, arg2);
                 case "set-car!":
@@ -96,20 +98,27 @@ namespace Tree
                 case "eq?":
                     return BoolLit.getInstance(arg1 == arg2);
                 case "procedure?":
-                    break;
-                case "read": //not sure
-                    break;
-                case "write": //bamboozeled
-                    break;
-                case "display": //MySQL query
-                    break;
-                case "newline": //\n?
-                    break;
-                case "eval": // danananananananananana  BATMAN
-                    break;
-                case "apply": // apply DIS
-                    break;
+                    return BoolLit.getInstance(arg1.isProcedure());
+                //case "read": //not sure
+                //    break;
+                //case "write": //bamboozeled
+                //    break;
+                //case "display": //MySQL query  
+                //    break;
+                //case "newline": //\n?
+                //    break;
+                //case "eval": // danananananananananana  BATMAN
+                //    break;
+                //case "apply": // apply DIS
+                //    break;
                 case "interaction-environment": // interacttteddlkskllklkfd
+                    Environment env; //args.env
+                    //do
+                    //{
+                    //    //TODO
+                    //    env = new Environment();
+                    //} while (env != null);
+                    
                     break;
 
             }

@@ -43,8 +43,31 @@ namespace Tree
         // TODO: The method apply() should be defined in class Node
         // to report an error.  It should be overridden only in classes
         // BuiltIn and Closure.
+        /*
+         * Before calling the function apply, its arguments are evaluated
+         * the first argument must be a closure, then apply needs todo
+         * extract the environment out of the closure
+         * add a new frame to the environment that binds the parameters
+         * to the corresponding argument values
+         * recursively call eval for the function body and the new enviornment
+         * 
+         */
         public override Node apply (Node args)
         {
+            //need to get both args
+            Node arg1 = args.getCar(), arg2 = args.getCdr();
+
+            //need to see if arg1 is a Closure
+            if(arg1.isProcedure())
+            {
+                //getting the environment out of the Closure arg1
+                Environment newEnv = ((Closure)arg1).getEnv();
+                //adding a new frame to the environment
+                newEnv.define(((Closure)arg1).getFun(), arg2);
+                //trying to recursively call eval 
+                newEnv.eval(newEnv);
+            }
+
             return new StringLit("Error: Closure.apply not yet implemented");
         }
     }    

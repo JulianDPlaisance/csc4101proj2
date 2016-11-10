@@ -116,7 +116,16 @@ namespace Tree
         //      if we don't find the name, it is an error
         public void assign(Node id, Node val)
         {
-            // TODO: implement this function
+            Node papaNode = lookup(id);
+
+            if(papaNode == null)
+            {
+                Console.Error.Write("Node is null");
+            }
+            else
+            {
+
+            }
         }
     }
 }
