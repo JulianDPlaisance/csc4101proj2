@@ -66,9 +66,13 @@ namespace Tree
                 newEnv.define(((Closure)arg1).getFun(), arg2);
                 //trying to recursively call eval 
                 newEnv.eval(newEnv);
+                //return environment?
+                return newEnv;
             }
-
-            return new StringLit("Error: Closure.apply not yet implemented");
+            else
+            {
+                return new StringLit("Error: apply on non closure");
+            }
         }
     }    
 }

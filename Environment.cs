@@ -107,7 +107,15 @@ namespace Tree
         //      otherwise add a name-value pair as first element to the innermost scope
         public void define(Node id, Node val)
         {
-            frame = new Cons(id, new Cons(val, null));
+            //frame = new Closure(new Cons(id, new Cons(val, null)), new Environment(env));
+            if(this.lookup(id) != null)
+            {
+                frame.setCdr(new Cons(val, null));
+            }
+            else
+            {
+                frame = new Closure(new Cons(id, new Cons(val, null)), env);
+            }
         }
 
         //  - assign to a name (for implementing set!)
@@ -116,15 +124,17 @@ namespace Tree
         //      if we don't find the name, it is an error
         public void assign(Node id, Node val)
         {
-            Node papaNode = lookup(id);
-
-            if(papaNode == null)
+            if(this.lookup(id) != null)
             {
-                Console.Error.Write("Node is null");
+                frame.setCdr(new Cons(val, null));
+            }
+            else if(env.lookup(id) != null)
+            {
+                env.assign(id, val);
             }
             else
             {
-
+                Console.Error.WriteLine("Name not found Env.assign: " + id.getName());
             }
         }
     }
