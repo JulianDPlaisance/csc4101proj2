@@ -14,6 +14,8 @@
 // the function symbol.
 
 using System;
+using Parse;
+using Tree;
 
 namespace Tree
 {
@@ -99,30 +101,28 @@ namespace Tree
                     return BoolLit.getInstance(arg1 == arg2);
                 case "procedure?":
                     return BoolLit.getInstance(arg1.isProcedure());
-                //case "read": //not sure
-                //    break;
-                //case "write": //bamboozeled
-                //    break;
-                //case "display": //MySQL query  
-                //    break;
-                //case "newline": //\n?
-                //    break;
-                //case "eval": // danananananananananana  BATMAN
-                //    break;
-                //case "apply": // apply DIS
-                //    break;
-                case "interaction-environment": // interacttteddlkskllklkfd
-                    Environment env; //args.env
+                case "read": //call parser and returns parse tree
+                    Parser parse = new Parser(new Scanner(Console.In), new TreeBuilder());
+                    return (Node)parse.parseExp();
+                case "write":
+                    return new StringLit("Cha{" + arg1.ToString() + "/*WRITE*\\}");
+                case "display":
+                    return new StringLit("Cha{" + arg1.ToString() + "/*DISPLAY*\\}"); //not truly implemented, placeholder code I tink
+                case "newline": //\n?
+                    return new StringLit("\n");
+                case "eval":
+                    return arg1.eval(new Environment());
+                case "apply":
+                    return arg1.apply(arg2);
+                case "interaction-environment":
+                    //args.env
                     //do
                     //{
                     //    //TODO
                     //    env = new Environment();
                     //} while (env != null);
-                    
-                    break;
-
+                    return new Environment();
             }
-
             return null;
         }
 
