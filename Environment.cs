@@ -110,10 +110,12 @@ namespace Tree
             //frame = new Closure(new Cons(id, new Cons(val, null)), new Environment(env));
             if(this.lookup(id) != null)
             {
+                Console.Error.WriteLine(val.getName() + "lookup on val != null");
                 frame.setCdr(new Cons(val, null));
             }
             else
             {
+                Console.Error.WriteLine(val.getName() + "lookup on val == null");
                 frame = new Closure(new Cons(id, new Cons(val, null)), env);
             }
         }
@@ -135,6 +137,22 @@ namespace Tree
             else
             {
                 Console.Error.WriteLine("Name not found Env.assign: " + id.getName());
+            }
+        }
+
+        public void GlobalEnvironment()
+        {
+            String[] builtins = 
+            {
+                "b+", "b-", "b*", "b/", "b=", "number?", "symbol?",
+                "null?", "b<", "b>", "car", "cdr", "set-car!", "set-cdr!", "cons",
+                "eq?", "procedure?", "read", "write", "eval", "apply", "display",
+                "newline", "interaction-environment", "b+"
+            };
+
+            for(int i = 0; i < builtins.Length; i++)
+            {
+                this.define(new Ident(builtins[i]), new BuiltIn(new Ident(builtins[i])));
             }
         }
     }

@@ -73,7 +73,7 @@ namespace Tree
                     return BinArith(((IntLit)arg1).getValue(), ((IntLit)arg2).getValue(), ">");
                 case "b<":
                     return BinArith(((IntLit)arg1).getValue(), ((IntLit)arg2).getValue(), "<");
-                case "car":  // ????????????????
+                case "car":
                     if (arg1.isNull())
                         return arg1; //arg1==nil or null?
                     else
